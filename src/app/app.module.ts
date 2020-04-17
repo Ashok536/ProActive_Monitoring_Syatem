@@ -34,6 +34,7 @@ import { QueueComponent } from './queue/queue.component';
 import { ReportComponent } from './report/report.component';
 import { ReportService } from './services/report.service';
 import { ExcelService } from './services/excel.service';
+import { MatSortModule } from '@angular/material';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ExcelService } from './services/excel.service';
     ]),
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule
   ],
   providers: [
     SearchService,

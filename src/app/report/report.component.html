@@ -32,14 +32,16 @@
           <mat-option value="false">false</mat-option>
         </mat-select>
       </mat-form-field>
-      <!-- <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="filterColumn('Inc_Num')">Invoice Number</button>
-        <button mat-menu-item (click)="filterColumn('Inc_Raised')">Incident Raised</button>
-      </mat-menu> -->
       <mat-form-field class="form-field inc-width">
-        <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)" placeholder="Filter by Invoice_Num">
+        <input matInput [matDatepicker]="picker" [formControl]="dateFilter" (click)='picker.open()'
+         placeholder="Filter by Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button [ngStyle]="{'visibility': (raisedValue || globalFilter || reprocessedValue) ? 'visible' : 'hidden' }"
+      <mat-form-field class="form-field inc-width">
+        <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)" placeholder="Filter by Invoice Number">
+      </mat-form-field>
+      <button [ngStyle]="{'visibility': (raisedValue || globalFilter || reprocessedValue || datechange) ? 'visible' : 'hidden' }"
       (click)="resetFilters()" class="btn_circle">
         <mat-icon class="close-icon">close</mat-icon>
       </button>
@@ -52,22 +54,22 @@
   <mat-table  #table [dataSource]="dataSource" matSort class="mat-tableheight">
 
     <ng-container matColumnDef="invoiceNum">
-      <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Number </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.invoiceNum}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="createdDate">
-      <mat-header-cell *matHeaderCellDef> Create Date </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Create Date </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="incidentRaised">
-      <mat-header-cell *matHeaderCellDef> Incident Raised </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Incident Raised </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.incidentRaised}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="invoiceReprocessed">
-      <mat-header-cell *matHeaderCellDef> Incident Reprocessed </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Reprocessed </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.invoiceReprocessed}} </mat-cell>
     </ng-container>
 
