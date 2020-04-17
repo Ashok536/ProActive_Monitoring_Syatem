@@ -65,7 +65,7 @@ export class ReportComponent implements OnInit {
       {
         this.datechange = positionFilterValue.toDateString();
         var datePipe = new DatePipe('en-US');
-        const sDate = datePipe.transform(positionFilterValue, 'EEE, d MMM y');
+        const sDate = datePipe.transform(positionFilterValue, 'EEE, dd MMM y');
         this.filteredValues['createdDate'] = sDate;
         this.dataSource.filter = JSON.stringify(this.filteredValues);
       }
